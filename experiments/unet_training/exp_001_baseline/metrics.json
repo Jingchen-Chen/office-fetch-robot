@@ -1,0 +1,18 @@
+{
+  "experiment": "exp_001_baseline",
+  "status": "pending",
+  "best_epoch": null,
+  "metrics": {
+    "train_loss": [],
+    "val_loss": [],
+    "train_miou": [],
+    "val_miou": [],
+    "train_accuracy": [],
+    "val_accuracy": []
+  },
+  "test_results": {
+    "miou": null,
+    "accuracy": null,
+    "per_class_iou": {}
+  }
+}

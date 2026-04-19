@@ -1,0 +1,17 @@
+planner_node:
+  ros__parameters:
+    inflation_radius: 0.3
+    planning_rate: 1.0
+
+controller_node:
+  ros__parameters:
+    max_linear_vel: 0.3
+    max_angular_vel: 1.0
+    lookahead_distance: 0.5
+    goal_tolerance: 0.1
+
+next_best_view_node:
+  ros__parameters:
+    min_frontier_size: 5
+    exploration_gain_weight: 1.0
+    distance_cost_weight: 0.5

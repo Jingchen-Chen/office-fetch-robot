@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.venv/
+venv/
+ENV/
+
+# ROS2
+install/
+log/
+.colcon/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Machine Learning & Data
+*.pth
+*.pt
+*.onnx
+*.h5
+*.ckpt
+datasets/
+checkpoints/
+# Note: config files (.yaml, .json) should NOT be ignored
+
+# Gazebo
+*.log
+*.gazebo/
+
+# Large files in resources
+resources/*
+!.gitkeep

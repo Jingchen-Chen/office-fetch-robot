@@ -1,0 +1,4 @@
+# Training Log — exp_001_baseline
+# Started: [timestamp]
+# Config: config.yaml
+# ================================

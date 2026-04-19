@@ -1,0 +1,12 @@
+segmentation_node:
+  ros__parameters:
+    model_path: "checkpoints/best_model.pth"
+    num_classes: 2
+    confidence_threshold: 0.5
+    device: "cuda"
+
+baseline_detector_node:
+  ros__parameters:
+    target_color_lower: [0, 100, 100]
+    target_color_upper: [10, 255, 255]
+    min_contour_area: 500
