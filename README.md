@@ -37,11 +37,13 @@ office-fetch-robot/
 
 ## Quick Start Instructions
 1. **Clone the repository**:
+   
    ```bash
-   git clone <repo_url>
+   git clone https://github.com/G-O-K-U/office-fetch-robot.git
    cd office-fetch-robot
    ```
 2. **Build with colcon**:
+   
    ```bash
    colcon build --symlink-install
    ```
@@ -50,6 +52,7 @@ office-fetch-robot/
    source install/setup.bash
    ```
 4. **Launch the simulation (TBD)**:
+   
    ```bash
    ros2 launch fetch_robot_bringup fetch_robot_gazebo.launch.py
    ```
@@ -69,7 +72,11 @@ office-fetch-robot/
 - Use descriptive commit messages.
 - Format: `<type>(<scope>): <subject>` (e.g., `feat(vision): add U-Net inference node`).
 
+> For detailed contribution guidelines, devlog templates, and experiment tracking conventions, see [CONTRIBUTING.md](./CONTRIBUTING.md).
+
 ## Milestones
 - **Presentation 1**: CW19 (May 3, 2026) - Project proposal and preliminary design.
 - **Presentation 2**: CW27 (Early July 2026) - Mid-term progress and prototype demo.
 - **Final Submission**: CW36 (Sept 1, 2026) - Final project report and code.
+
+![Quick Reference](docs/TEAM_QUICKREF.svg)
