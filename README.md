@@ -1,4 +1,4 @@
-# Office Fetch Robot (P14)
+# Office Fetch Robot
 
 ## Description
 An autonomous mobile robot for office environments that navigates, detects, and retrieves objects using ROS2 + Gazebo simulation. This project aims to integrate a 2D navigation stack with a vision-based object detection and segmentation module to perform retrieval tasks in a dynamic office setting.
