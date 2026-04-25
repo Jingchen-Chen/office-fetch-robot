@@ -33,7 +33,7 @@ class ControllerNode(Node):
         self.aruco_sub = self.create_subscription(PoseStamped, '/aruco/pose', self.pose_callback, 10)
 
         # Publishers
-        self.cmd_pub = self.create_publisher(Twist, '/cmd_vel', 10)
+        self.cmd_pub = self.create_publisher(Twist, '/P1_robot0/cmd_vel', 10)
         self.status_pub = self.create_publisher(String, '/navigation/status', 10)
 
         # Timer

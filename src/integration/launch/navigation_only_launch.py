@@ -10,17 +10,23 @@ def generate_launch_description():
     pkg_aruco = get_package_share_directory('aruco_localization')
     pkg_mapping = get_package_share_directory('occupancy_mapping')
     pkg_planning = get_package_share_directory('path_planning')
+    pkg_sim = get_package_share_directory('ipb_ros2_sim')
 
     aruco_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(pkg_aruco, 'launch', 'aruco_localization.launch.py'))
+        PythonLaunchDescriptionSource(os.path.join(pkg_aruco, 'launch', 'aruco_localization_launch.py'))
     )
     
     mapping_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(pkg_mapping, 'launch', 'occupancy_mapping.launch.py'))
+        PythonLaunchDescriptionSource(os.path.join(pkg_mapping, 'launch', 'occupancy_mapping_launch.py'))
     )
     
     planning_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(pkg_planning, 'launch', 'path_planning.launch.py'))
+        PythonLaunchDescriptionSource(os.path.join(pkg_planning, 'launch', 'path_planning_launch.py'))
+    )
+
+    sim_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(pkg_sim, 'launch', 'all.launch.py')),
+        launch_arguments={'sim_config': 'indoor'}.items()
     )
 
     # RViz (still useful)

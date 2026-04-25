@@ -27,7 +27,7 @@ class ScanMatcherNode(Node):
         self.current_pose = np.array([0.0, 0.0, 0.0]) # x, y, yaw
 
         # Subscriptions
-        self.scan_sub = self.create_subscription(LaserScan, '/scan', self.scan_callback, 10)
+        self.scan_sub = self.create_subscription(LaserScan, '/P1_robot0/lidar_2d', self.scan_callback, 10)
         self.map_sub = self.create_subscription(OccupancyGrid, '/map', self.map_callback, 10)
         
         # Publisher
