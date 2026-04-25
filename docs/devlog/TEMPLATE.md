@@ -1,7 +1,7 @@
 # [Date] Title
 
 **Author:** Name
-**Module:** aruco_localization / occupancy_mapping / path_planning / vision / integration / gazebo_env
+**Module:** aruco_localization / occupancy_mapping / path_planning / vision / integration / ipb_ros2_sim
 **Type:** feature | bugfix | experiment | decision
 
 ## Objective

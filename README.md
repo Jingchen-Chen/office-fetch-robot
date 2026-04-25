@@ -1,82 +1,77 @@
 # Office Fetch Robot
 
 ## Description
-An autonomous mobile robot for office environments that navigates, detects, and retrieves objects using ROS2 + Gazebo simulation. This project aims to integrate a 2D navigation stack with a vision-based object detection and segmentation module to perform retrieval tasks in a dynamic office setting.
+An autonomous mobile robot for office environments that navigates, detects, and retrieves objects using ROS2 + Gazebo simulation. This project integrates a 2D navigation stack with a vision-based object detection and segmentation module (U-Net) using the official `ipb_ros2_sim` framework.
 
 ## System Architecture Overview
 The system is divided into two main components:
 - **2D Navigation Stack**: Responsible for mapping, localization, and path planning using LIDAR and IMU data.
-- **Vision Module (U-Net)**: Processes RGB-D camera feeds to perform semantic segmentation and object detection for target localization.
-
-## Tech Stack
-- **ROS2**: Humble Hawksbill
-- **Simulation**: Gazebo
-- **Vision**: OpenCV, PyTorch (U-Net)
-- **Programming Language**: Python 3, C++ (where performance is critical)
+- **Vision Module (U-Net)**: Processes RGB-D camera feeds to perform semantic segmentation and object detection.
+- **Simulation**: Uses `ipb_ros2_sim` with Jackal/Husky robots and ROS2 native Gazebo bridge.
 
 ## Repository Structure
 ```text
 office-fetch-robot/
-├── build/                      # Colcon build output (ignored)
+├── docker/                     # Docker configuration (Dockerfile, compose.yaml)
 ├── docs/                       # Project documentation
-│   ├── architecture.md         # System design details
-│   ├── devlog/                 # Daily/weekly development logs
-│   ├── meeting-notes/          # Internal team discussion notes
-│   └── presentations/          # Slides and presentation materials
 ├── experiments/                # Training scripts and benchmark results
-│   ├── navigation_benchmarks/  # SLAM/Nav2 performance tests
-│   └── unet_training/          # U-Net model training scripts
-├── install/                    # Colcon install output (ignored)
-├── log/                        # Colcon log output (ignored)
 ├── resources/                  # Large assets (meshes, datasets)
-├── scripts/                    # Utility scripts (not ROS nodes)
-├── src/                        # ROS2 packages (to be created)
-├── .gitignore
+├── scripts/                    # Utility scripts
+├── src/                        # ROS2 packages
+│   ├── ipb_ros2_sim/           # Official simulation framework
+│   ├── aruco_localization/     # ArUco marker based localization
+│   ├── occupancy_mapping/      # Lidar-based occupancy grid mapping
+│   ├── path_planning/          # A* planner and pure pursuit controller
+│   ├── vision/                 # U-Net segmentation and baseline detection
+│   └── integration/            # Top-level launch and mission control
 └── README.md
 ```
 
-## Quick Start Instructions
-1. **Clone the repository**:
-   
-   ```bash
-   git clone https://github.com/G-O-K-U/office-fetch-robot.git
-   cd office-fetch-robot
-   ```
-2. **Build with colcon**:
-   
-   ```bash
-   colcon build --symlink-install
-   ```
-3. **Source the environment**:
-   ```bash
-   source install/setup.bash
-   ```
-4. **Launch the simulation (TBD)**:
-   
-   ```bash
-   ros2 launch fetch_robot_bringup fetch_robot_gazebo.launch.py
-   ```
+## Quick Start (Docker Workflow)
 
-## Team Workflow
-### Branch Naming
-- `feature/xxx`: New features or components.
-- `fix/xxx`: Bug fixes.
-- `docs/xxx`: Documentation updates.
-- `chore/xxx`: Maintenance tasks (CI/CD, dependencies).
+### 1. Prerequisites
+- Docker and Docker Compose installed.
+- NVIDIA Container Toolkit (optional, for GPU acceleration).
 
-### PR Review Policy
-- At least one approval from another team member is required before merging to `main`.
-- All CI checks must pass.
+### 2. Launch the Environment
+```bash
+cd office-fetch-robot/docker
 
-### Commit Convention
-- Use descriptive commit messages.
-- Format: `<type>(<scope>): <subject>` (e.g., `feat(vision): add U-Net inference node`).
+# Build the image (includes PyTorch, OpenCV, ROS2 Jazzy)
+docker compose build
 
-> For detailed contribution guidelines, devlog templates, and experiment tracking conventions, see [CONTRIBUTING.md](./CONTRIBUTING.md).
+# Start the container
+docker compose up -d
+
+# Enter the container
+docker compose exec office_fetch_robot zsh
+```
+
+### 3. Build and Run
+Inside the container:
+```bash
+# Build the project
+cd ~/ros_ws
+colcon build --symlink-install
+source install/setup.zsh
+
+# Launch the full stack (Simulation + Navigation + Vision)
+ros2 launch integration full_stack_launch.py
+```
+
+## Topic Configuration (Namespace: `/P1_robot0/`)
+| Component | Old Topic | New Topic |
+|-----------|-----------|-----------|
+| Lidar | `/scan` | `/P1_robot0/lidar_2d` |
+| Camera | `/camera/image_raw` | `/P1_robot0/cam_front/image_raw` |
+| Odometry | `/odom` | `/P1_robot0/wheel_odom` |
+| Control | `/cmd_vel` | `/P1_robot0/cmd_vel` |
+
+## Notes for Team Members
+- **No GPU?**: If you don't have an NVIDIA GPU, edit `docker/compose.yaml` and comment out the `deploy` block.
+- **Simulation Config**: The simulation defaults to `indoor` (office) config. Modify `full_stack_launch.py` to change `sim_config` if needed.
 
 ## Milestones
 - **Presentation 1**: CW19 (May 3, 2026) - Project proposal and preliminary design.
 - **Presentation 2**: CW27 (Early July 2026) - Mid-term progress and prototype demo.
 - **Final Submission**: CW36 (Sept 1, 2026) - Final project report and code.
-
-![Quick Reference](docs/TEAM_QUICKREF.svg)

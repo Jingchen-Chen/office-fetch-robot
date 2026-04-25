@@ -13,27 +13,28 @@ def generate_launch_description():
     pkg_mapping = get_package_share_directory('occupancy_mapping')
     pkg_planning = get_package_share_directory('path_planning')
     pkg_vision = get_package_share_directory('vision')
-    pkg_gazebo = get_package_share_directory('gazebo_env')
+    pkg_sim = get_package_share_directory('ipb_ros2_sim')
 
     # Launch files
     aruco_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(pkg_aruco, 'launch', 'aruco_localization.launch.py'))
+        PythonLaunchDescriptionSource(os.path.join(pkg_aruco, 'launch', 'aruco_localization_launch.py'))
     )
     
     mapping_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(pkg_mapping, 'launch', 'occupancy_mapping.launch.py'))
+        PythonLaunchDescriptionSource(os.path.join(pkg_mapping, 'launch', 'occupancy_mapping_launch.py'))
     )
     
     planning_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(pkg_planning, 'launch', 'path_planning.launch.py'))
+        PythonLaunchDescriptionSource(os.path.join(pkg_planning, 'launch', 'path_planning_launch.py'))
     )
     
     vision_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(pkg_vision, 'launch', 'vision.launch.py'))
+        PythonLaunchDescriptionSource(os.path.join(pkg_vision, 'launch', 'vision_launch.py'))
     )
     
-    gazebo_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(pkg_gazebo, 'launch', 'gazebo.launch.py'))
+    sim_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(os.path.join(pkg_sim, 'launch', 'all.launch.py')),
+        launch_arguments={'sim_config': 'indoor'}.items()
     )
 
     # RViz

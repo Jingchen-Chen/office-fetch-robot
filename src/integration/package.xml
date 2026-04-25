@@ -17,7 +17,7 @@
   <exec_depend>occupancy_mapping</exec_depend>
   <exec_depend>path_planning</exec_depend>
   <exec_depend>vision</exec_depend>
-  <exec_depend>gazebo_env</exec_depend>
+  <exec_depend>ipb_ros2_sim</exec_depend>
 
   <export>
     <build_type>ament_python</build_type>

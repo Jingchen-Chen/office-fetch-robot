@@ -25,7 +25,7 @@ class ArucoDetector(Node):
         # Subscriptions
         self.subscription = self.create_subscription(
             Image,
-            '/camera/image_raw',
+            '/P1_robot0/cam_front/image_raw',
             self.image_callback,
             10)
         
